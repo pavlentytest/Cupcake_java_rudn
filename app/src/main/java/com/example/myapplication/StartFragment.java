@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.myapplication.databinding.FragmentStartBinding;
+import com.example.myapplication.model.OrderViewModel;
+
+import java.util.Objects;
 
 public class StartFragment extends Fragment {
 
     private FragmentStartBinding fragmentStartBinding;
+    private OrderViewModel order;
 
     public StartFragment() {
         // Required empty public constructor
@@ -31,11 +37,13 @@ public class StartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentStartBinding = FragmentStartBinding.inflate(inflater, container, false);
+        order = new ViewModelProvider(getActivity()).get(OrderViewModel.class);
         return fragmentStartBinding.getRoot();
     }
 
     public void orderCupcake(int quantity) {
-        Toast.makeText(getActivity(), "Ordered "+quantity+" cupcake(s)", Toast.LENGTH_SHORT).show();
+        order.setQuantity(quantity);
+        Navigation.findNavController(requireView()).navigate(R.id.action_startFragment_to_flavorFragment);
     }
 
     @Override

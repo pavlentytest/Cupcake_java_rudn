@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.databinding.FragmentFlavorBinding;
 import com.example.myapplication.databinding.FragmentStartBinding;
+import com.example.myapplication.model.OrderViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +34,7 @@ public class FlavorFragment extends Fragment {
     private String mParam2;
 
     private FragmentFlavorBinding fragmentFlavorBinding;
+    private OrderViewModel order;
 
     public FlavorFragment() {
         // Required empty public constructor
@@ -69,13 +73,15 @@ public class FlavorFragment extends Fragment {
     }
 
     public void goToNextScreen() {
-        Toast.makeText(getActivity(), "Next", Toast.LENGTH_SHORT).show();
+        Navigation.findNavController(requireView()).navigate(R.id.action_flavorFragment_to_pickupFragment);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentFlavorBinding = FragmentFlavorBinding.inflate(inflater, container, false);
+        order = new ViewModelProvider(getActivity()).get(OrderViewModel.class);
+        fragmentFlavorBinding.setViewModel(order);
         return fragmentFlavorBinding.getRoot();
     }
 
