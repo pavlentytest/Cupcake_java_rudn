@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -14,10 +15,13 @@ import android.widget.Toast;
 
 import com.example.myapplication.databinding.FragmentPickupBinding;
 import com.example.myapplication.databinding.FragmentStartBinding;
+import com.example.myapplication.model.OrderViewModel;
 
 public class PickupFragment extends Fragment {
 
     private FragmentPickupBinding fragmentPickupBinding;
+
+    private OrderViewModel order;
 
     public PickupFragment() {
         // Required empty public constructor
@@ -41,6 +45,8 @@ public class PickupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentPickupBinding = FragmentPickupBinding.inflate(inflater, container, false);
+        order = new ViewModelProvider(getActivity()).get(OrderViewModel.class);
+        fragmentPickupBinding.setViewModel(order);
         return fragmentPickupBinding.getRoot();
     }
 
