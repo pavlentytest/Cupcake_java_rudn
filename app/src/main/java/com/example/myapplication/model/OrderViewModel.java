@@ -53,7 +53,6 @@ public class OrderViewModel extends ViewModel {
         this.price.setValue(price);
     }
 
-
     private MutableLiveData<String> date = new MutableLiveData<>("");
 
     public void setDate(String date) {
