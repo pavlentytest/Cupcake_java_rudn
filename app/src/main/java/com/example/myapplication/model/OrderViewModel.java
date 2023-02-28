@@ -31,6 +31,9 @@ public class OrderViewModel extends ViewModel {
 
     public void update_price() {
         double calc = this.quantity.getValue() * PRICE_PER_CUPCAKE;
+        if(date.getValue().equals(dateOptions.get(0))) {
+            calc += 1000;
+        }
         this.price.setValue(calc);
     }
 
@@ -55,6 +58,7 @@ public class OrderViewModel extends ViewModel {
 
     public void setDate(String date) {
         this.date.setValue(date);
+        update_price();
     }
 
     public LiveData<String> getDate() {
