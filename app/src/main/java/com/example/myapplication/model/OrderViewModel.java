@@ -14,6 +14,8 @@ import java.util.Locale;
 public class OrderViewModel extends ViewModel {
     private MutableLiveData<Integer> quantity = new MutableLiveData<>(0);
     private MutableLiveData<String> flavour = new MutableLiveData<>("");
+
+
     private MutableLiveData<Double> price = new MutableLiveData<>(0.0);
 
     public static final double PRICE_PER_CUPCAKE = 100.00;
@@ -48,6 +50,16 @@ public class OrderViewModel extends ViewModel {
         this.price.setValue(price);
     }
 
+
+    private MutableLiveData<String> date = new MutableLiveData<>("");
+
+    public void setDate(String date) {
+        this.date.setValue(date);
+    }
+
+    public LiveData<String> getDate() {
+        return date;
+    }
 
     public List<String> dateOptions = getPickupOptions();
 
